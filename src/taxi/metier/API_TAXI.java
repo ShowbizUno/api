@@ -58,7 +58,7 @@ public class API_TAXI {
     }
 
     /**
-    * getter idtaxi
+    * getter identifiant taxi
     * @return Identifiant du taxi
     */
     public int getIdtaxi() {
@@ -66,7 +66,7 @@ public class API_TAXI {
     }
 
     /**
-     * setter idtaxi
+     * setter identifiant taxi
      * @param idtaxi Identifiant du taxi
      */
     public void setIdtaxi(int idtaxi) {

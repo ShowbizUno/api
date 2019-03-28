@@ -30,7 +30,7 @@ public class GestionTaxis {
             System.out.println("Menu des taxis");
 
             try {
-                System.out.println("1.Créer un nouveau taxi\n2.Rechercher un taxi\n3.Modification du taxi\n4.Suppression du taxi \n5. Fin");
+                System.out.println("1.Créer un nouveau taxi\n2.Rechercher un taxi\n3.Modification du taxi\n4.Suppression du taxi \n5. Affichage des locations via l'id client\n6. Fin");
                 System.out.println("Votre réponse: ");
                 rep = Integer.parseInt(sc.nextLine());
                 switch (rep) {
@@ -47,15 +47,17 @@ public class GestionTaxis {
                         suppression();
                         break;
                     case 5:
-                        System.out.println("Fin du programme. Merci");
+                       affichageTotal();
                         break;
+                    case 6: 
+                         System.out.println("Fin du programme. Merci");
                     default:
                         System.out.println("Erreur!");
                 }
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Erreur: " + e);
             }
-        } while (rep != 5);
+        } while (rep != 6);
         DBConnection.closeConnection();
     }
 
@@ -232,6 +234,11 @@ public class GestionTaxis {
             }
         } while (erreur == true);
         return -1;
+    }
+    
+    public void affichageTotal(){
+        System.out.println("Veuillez entrer l'id de la location");
+        int id=sc.nextInt();
     }
 
     public void actuel() {

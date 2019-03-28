@@ -58,7 +58,7 @@ public class API_CLIENTTAXI {
     }
 
     /**
-    * getter idclient
+    * getter identifiant client
     * @return identifiant du client
     */
     public int getIdclient() {
@@ -66,7 +66,7 @@ public class API_CLIENTTAXI {
     }
 
     /**
-     * setter idclient
+     * setter identifiant client
      * @param idclient identifiant du client
      */
     public void setIdclient(int idclient) {
@@ -122,7 +122,7 @@ public class API_CLIENTTAXI {
     }
 
     /**
-    * getter idadr
+    * getter identifiant adresse
     * @return Identifiant de l'adresse du client
     */
     public int getIdadr() {
@@ -130,7 +130,7 @@ public class API_CLIENTTAXI {
     }
 
     /**
-     * setter idadr
+     * setter identifiant adresse
      * @param idadr Identifiant de l'adresse du client
      */
     public void setIdadr(int idadr) {

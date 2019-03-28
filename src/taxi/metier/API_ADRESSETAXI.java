@@ -58,7 +58,7 @@ public class API_ADRESSETAXI {
     }
     
     /**
-    * getter idadr
+    * getter identifiant adresse
     * @return identifiant de l'adresse
     */
     public int getIdadr() {
@@ -66,7 +66,7 @@ public class API_ADRESSETAXI {
     }
     
     /**
-     * setter idadr
+     * setter identifiant adresse
      * @param idadr identifiant de l'adresse
      */
     public void setIdadr(int idadr) {

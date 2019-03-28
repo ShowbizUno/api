@@ -159,7 +159,7 @@ public class TaxiDAO extends DAO<API_TAXI> {
     }
     
     /**
-     * méthode permettant de récupérer toutes les locations ayant un cretain id_taxi
+     * méthode permettant de récupérer toutes les locations ayant un certain id_taxi
      *
      * @param obj Taxi recherché
      * @return entier variant en fonction de la recherche de location
@@ -243,6 +243,40 @@ public class TaxiDAO extends DAO<API_TAXI> {
                     throw new SQLException("Immatriculation inconnue");
                 }
 
+            }
+        }
+    }
+    
+    /**
+     * méthode permettant de récupérer toutes les locations relatives à un id location
+     *
+     * @param idloc Identificateur de la location
+     * @return liste des locations
+     * @throws java.sql.SQLException
+     */
+    public List<API_TAXI> rechloc(int idloc) throws SQLException{
+        List<API_TAXI> loca = new ArrayList<>();
+        String req = "select * from vue_adresse where idloc = ?";
+//TODO continuer le code copié-collé
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+            pstm.setInt(1,idloc);
+            try (ResultSet rs = pstm.executeQuery()) {
+                boolean trouve = false;
+                while (rs.next()) {
+                    trouve = true;
+                    int idtaxi = rs.getInt("IDTAXI");
+                    String imma = rs.getString("IMMATRICULATION");
+                    String carburant = rs.getString("CARBURANT");
+                    float prixkm = rs.getFloat("PRIXKM");
+                    String description = rs.getString("DESCRIPTION");
+                    plusieurs.add(new API_TAXI(idtaxi, imma, carburant, prixkm, description));
+                }
+
+                if (!trouve) {
+                    throw new SQLException("Description inconnue");
+                } else {
+                    return plusieurs;
+                }
             }
         }
     }

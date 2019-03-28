@@ -10,6 +10,7 @@ public class GestionGenerale {
 
     Scanner sc = new Scanner(System.in);
 
+    
     public GestionGenerale() {
 
     }

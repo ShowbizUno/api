@@ -87,7 +87,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-    * getter idloc
+    * getter identifiant location
     * @return Identifiant de la location du taxi
     */
     public int getIdloc() {
@@ -95,7 +95,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-     * setter idloc
+     * setter identifiant location
      * @param idloc Identifiant de la location du taxi
      */
     public void setIdloc(int idloc) {
@@ -103,7 +103,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-    * getter dateLoc
+    * getter date Location
     * @return Date de la location du taxi
     */
     public LocalDate getDateloc() {
@@ -111,7 +111,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-     * setter dateloc
+     * setter date location
      * @param dateloc Date de la location du taxi
      */
     public void setDateloc(LocalDate dateloc) {
@@ -167,7 +167,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-    * getter adrdebut
+    * getter adresse debut
     * @return Identifiant de l'adresse de début
     */
     public int getAdrdebut() {
@@ -175,7 +175,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-     * setter adrdebut
+     * setter adresse debut
      * @param adrdebut Identifiant de l'adresse de début
      */
     public void setAdrdebut(int adrdebut) {
@@ -183,7 +183,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-    * getter adrfin
+    * getter adresse fin
     * @return Identifiant de l'adresse de fin
     */
     public int getAdrfin() {
@@ -191,7 +191,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-     * setter adrfin
+     * setter adresse fin
      * @param adrfin Identifiant de l'adresse de fin
      */
     public void setAdrfin(int adrfin) {
@@ -199,7 +199,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-    * getter idclient
+    * getter identifiant client
     * @return Identitfiant du client
     */
     public int getIdclient() {
@@ -207,7 +207,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-     * setter idclient
+     * setter identifiant client
      * @param idclient Identifiant du client
      */
     public void setIdclient(int idclient) {
@@ -215,7 +215,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-    * getter idtaxi
+    * getter identifiant taxi
     * @return Identitfiant du taxi
     */
     public int getIdtaxi() {
@@ -223,7 +223,7 @@ public class API_LOCATIONTAXI {
     }
 
     /**
-     * setter idtaxi
+     * setter identifiant taxi
      * @param idtaxi Identifiant du taxi
      */
     public void setIdtaxi(int idtaxi) {
