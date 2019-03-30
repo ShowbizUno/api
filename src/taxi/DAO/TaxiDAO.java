@@ -11,7 +11,9 @@ import java.sql.*;
 import java.util.*;
 import taxi.metier.API_TAXI;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import taxi.metier.vue_adresses;
 
 public class TaxiDAO extends DAO<API_TAXI> {
 
@@ -254,29 +256,55 @@ public class TaxiDAO extends DAO<API_TAXI> {
      * @return liste des locations
      * @throws java.sql.SQLException
      */
-    public List<API_TAXI> rechloc(int idloc) throws SQLException{
-        List<API_TAXI> loca = new ArrayList<>();
-        String req = "select * from vue_adresse where idloc = ?";
-//TODO continuer le code copié-collé
+    public List<vue_adresses> rechloc(int idloc) throws SQLException{
+        List<vue_adresses> loca = new ArrayList<>();
+        String req = "select * from vue_adresses where idloc = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
             pstm.setInt(1,idloc);
             try (ResultSet rs = pstm.executeQuery()) {
                 boolean trouve = false;
                 while (rs.next()) {
                     trouve = true;
-                    int idtaxi = rs.getInt("IDTAXI");
-                    String imma = rs.getString("IMMATRICULATION");
-                    String carburant = rs.getString("CARBURANT");
-                    float prixkm = rs.getFloat("PRIXKM");
-                    String description = rs.getString("DESCRIPTION");
-                    plusieurs.add(new API_TAXI(idtaxi, imma, carburant, prixkm, description));
+                    LocalDate dateloc = rs.getDate("DATELOC").toLocalDate();
+                    int kmtotal = rs.getInt("KMTOTAL");
+                    Float acompte = rs.getFloat("ACOMPTE");
+                    Float total = rs.getFloat("TOTAL");
+                    int idclient=rs.getInt("IDCLIENT");
+                    int idtaxi=rs.getInt("IDTAXI");
+                    int cp=rs.getInt("CP");
+                    String localite = rs.getString("LOCALITE");
+                    String rue = rs.getString("RUE");
+                    String num = rs.getString("NUM");
+                    int cp_retour=rs.getInt("cp retour");
+                    String localite_retour = rs.getString("loc retour");
+                    String rue_retour = rs.getString("rue retour");
+                    String num_retour = rs.getString("num retour");
+                    loca.add(new vue_adresses(idloc,dateloc,kmtotal,acompte,total,idclient,idtaxi,cp,localite,rue,num,cp_retour,localite_retour,rue_retour,num_retour));
                 }
 
                 if (!trouve) {
-                    throw new SQLException("Description inconnue");
+                    throw new SQLException("idloc inconnu");
                 } else {
-                    return plusieurs;
+                    return loca;
                 }
+            }
+        }
+    }
+    
+    public float prixTotalLoc(int idloc) throws SQLException{
+        String req = "select * from vue_prixtotal where idloc = ?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
+
+            pstm.setInt(1, idloc);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if (rs.next()) {
+                    Float prixtot=rs.getFloat("TOTAL");
+                    return prixtot;
+
+                } else {
+                    throw new SQLException("Id inconnu");
+                }
+
             }
         }
     }

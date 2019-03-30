@@ -1,4 +1,3 @@
-
 package projet_taxi;
 
 import java.sql.Connection;
@@ -9,6 +8,7 @@ import taxi.DAO.TaxiDAO;
 import taxi.DAO.DAO;
 import taxi.metier.API_TAXI;
 import myconnections.DBConnection;
+import taxi.metier.vue_adresses;
 
 /**
  *
@@ -19,8 +19,10 @@ public class GestionTaxis {
     Connection dbConnect = DBConnection.getConnection();
     Scanner sc = new Scanner(System.in);
     API_TAXI taxi = null;
-    DAO<API_TAXI> taxiDAO = new TaxiDAO();
+    //DAO<API_TAXI> taxiDAO = new TaxiDAO();
+    TaxiDAO taxiDAO = new TaxiDAO();
     List<API_TAXI> ListeTaxisActuels = null;
+    List<vue_adresses> ListeAdresses = null;
 
     public void gestionTaxi() {
         taxiDAO.setConnection(dbConnect);
@@ -30,7 +32,7 @@ public class GestionTaxis {
             System.out.println("Menu des taxis");
 
             try {
-                System.out.println("1.Créer un nouveau taxi\n2.Rechercher un taxi\n3.Modification du taxi\n4.Suppression du taxi \n5. Affichage des locations via l'id client\n6. Fin");
+                System.out.println("1.Créer un nouveau taxi\n2.Rechercher un taxi\n3.Modification du taxi\n4.Suppression du taxi \n5. Affichage des locations via l'id client\n6. Prix total d'une location\n7.Fin");
                 System.out.println("Votre réponse: ");
                 rep = Integer.parseInt(sc.nextLine());
                 switch (rep) {
@@ -47,17 +49,21 @@ public class GestionTaxis {
                         suppression();
                         break;
                     case 5:
-                       affichageTotal();
+                        affichageTotal();
                         break;
-                    case 6: 
-                         System.out.println("Fin du programme. Merci");
+                    case 6:
+                        affichagePrix();
+                        break;
+                    case 7: 
+                        System.out.println("Fin du programme. Merci");
+                        break;
                     default:
                         System.out.println("Erreur!");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Erreur: " + e);
             }
-        } while (rep != 6);
+        } while (rep != 7);
         DBConnection.closeConnection();
     }
 
@@ -123,7 +129,7 @@ public class GestionTaxis {
             try {
                 System.out.println("Veuillez entrer la description du taxi recherché: ");
                 String desc = sc.nextLine();
-                ListeTaxisActuels = ((TaxiDAO) taxiDAO).rechDesc(desc);
+                ListeTaxisActuels = taxiDAO.rechDesc(desc);
                 for (API_TAXI tx : ListeTaxisActuels) {
                     System.out.println(tx);
                 }
@@ -136,11 +142,11 @@ public class GestionTaxis {
     }
 
     public void modification() {
-       if (taxi==null){
-           System.out.println("Veuillez d'abord choisir un taxi actuel");
-           recherche();
-       }
-        
+        if (taxi == null) {
+            System.out.println("Veuillez d'abord choisir un taxi actuel");
+            recherche();
+        }
+
         try {
             System.out.println("Immatriculation du taxi recherché: " + taxi.getImmatriculation());
             System.out.println("Entrez l'immatriculation: ");
@@ -175,11 +181,11 @@ public class GestionTaxis {
     }
 
     public void suppression() {
-        if (taxi==null){
+        if (taxi == null) {
             System.out.println("Veuillez d'abord choisir un taxi actuel");
-           recherche();
+            recherche();
         }
-        
+
         int recup = -1;
         int rep = -1;
         try {
@@ -197,7 +203,7 @@ public class GestionTaxis {
                         break;
                     case 2:
                         break;
-                    default: 
+                    default:
                         System.out.println("Erreur lors de la saisie");
                 }
 
@@ -235,10 +241,32 @@ public class GestionTaxis {
         } while (erreur == true);
         return -1;
     }
+
+    public void affichageTotal() {
+        try {
+            System.out.println("Veuillez entrer l'id de la location");
+            int id = sc.nextInt();
+            ListeAdresses = taxiDAO.rechloc(id);
+            for (vue_adresses va : ListeAdresses) {
+                System.out.println(va);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+
+        }
+
+    }
     
-    public void affichageTotal(){
-        System.out.println("Veuillez entrer l'id de la location");
-        int id=sc.nextInt();
+    public void affichagePrix(){
+        try{
+            System.out.println("Veuillez entrer l'id de la location: ");
+            int id=sc.nextInt();
+            Float prix=taxiDAO.prixTotalLoc(id);
+            System.out.println("Le prix de votre location est de: "+prix+" euro(s).");
+        }catch (SQLException e){
+            System.out.println("Erreur "+e.getMessage());
+        }
     }
 
     public void actuel() {

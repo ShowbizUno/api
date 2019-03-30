@@ -367,6 +367,12 @@ public class vue_adresses {
     public void setNum_retour(String num_retour) {
         this.num_retour = num_retour;
     }
+
+    @Override
+    public String toString() {
+        return "vue_adresses{" + "idloc=" + idloc + ", dateloc=" + dateloc + ", kmtotal=" + kmtotal + ", acompte=" + acompte + ", total=" + total + ", idclient=" + idclient + ", idtaxi=" + idtaxi + ", cp=" + cp + ", localite=" + localite + ", rue=" + rue + ", num=" + num + ", cp_retour=" + cp_retour + ", loc_retour=" + loc_retour + ", rue_retour=" + rue_retour + ", num_retour=" + num_retour + '}';
+    }
+    
     
     
 }
