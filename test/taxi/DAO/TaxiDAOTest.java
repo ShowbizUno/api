@@ -23,10 +23,12 @@ import taxi.metier.vue_adresses;
  * @author Allison
  */
 public class TaxiDAOTest {
+
     static Connection dbConnect;
+
     public TaxiDAOTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
         dbConnect = DBConnection.getConnection();
@@ -35,15 +37,15 @@ public class TaxiDAOTest {
             System.exit(1);
         }
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -51,57 +53,69 @@ public class TaxiDAOTest {
     /**
      * Test of create method, of class TaxiDAO.
      */
-    @Test
+    //@Test
     public void testCreate() throws Exception {
+        //Test of a simple create
         System.out.println("create");
-        API_TAXI obj = new API_TAXI(0,"ImmaTest","Carb",1,"DescriTest");
         TaxiDAO instance = new TaxiDAO();
         instance.setConnection(dbConnect);
-        API_TAXI expResult = new API_TAXI(0,"ImmaTest","Carb",1,"DescriTest");
+        API_TAXI obj = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
+        API_TAXI expResult = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
         API_TAXI result = instance.create(obj);
-        
-        assertEquals("Immatriculations différentes",expResult.getImmatriculation(), result.getImmatriculation());
-        assertEquals("Carburants différents", expResult.getCarburant(),result.getCarburant());
-        assertEquals("Prix au km différents",expResult.getPrixkm(),result.getPrixkm(),0);
-        assertEquals("Descriptions différentes",expResult.getDescription(),result.getDescription());
-        assertNotEquals("Idtaxi restée a 0",result.getIdtaxi(),expResult.getIdtaxi());
-        
-        
-        obj = new API_TAXI(0,"ImmaTest","Car2",2,"DescriTest2");
-        try{
-            API_TAXI resultat_2=instance.create(obj);
+
+        assertEquals("Immatriculations différentes", expResult.getImmatriculation(), result.getImmatriculation());
+        assertEquals("Carburants différents", expResult.getCarburant(), result.getCarburant());
+        assertEquals("Prix au km différents", expResult.getPrixkm(), result.getPrixkm(), 0);
+        assertEquals("Descriptions différentes", expResult.getDescription(), result.getDescription());
+        assertNotEquals("Idtaxi restée a 0", result.getIdtaxi(), expResult.getIdtaxi());
+
+        //Test of creating an existing object
+        obj = new API_TAXI(0, "ImmaTest", "Car2", 2, "DescriTest2");
+        try {
+            API_TAXI resultat_2 = instance.create(obj);
             fail("Exception de doublon non générée");
             instance.deleteSolo(resultat_2);
+        } catch (SQLException e) {
+            instance.deleteSolo(result);
         }
-        catch(SQLException e){
-             instance.deleteSolo(result);
-        }
-      
-        obj = new API_TAXI(0,"ImmaTest","Car2",-1,"DescriTest2");
-        try{
+
+        //Test of creating an object with incorrect "Prixkm"
+        obj = new API_TAXI(0, "ImmaTest", "Car2", -1, "DescriTest2");
+        try {
             API_TAXI resultat_3 = instance.create(obj);
-            fail("Exception de check du prix au km non déclanché");
+            fail("Exception de check du prix au km non déclanchée");
             instance.deleteSolo(resultat_3);
+        } catch (SQLException e) {
+
         }
-        catch(SQLException e){
-            
-        }
-       
+
     }
 
     /**
      * Test of read method, of class TaxiDAO.
      */
-   // @Test
+    //@Test
     public void testRead() throws Exception {
         System.out.println("read");
         int idtaxi = 0;
         TaxiDAO instance = new TaxiDAO();
-        API_TAXI expResult = null;
+        instance.setConnection(dbConnect);
+        API_TAXI obj = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
+        API_TAXI expResult = instance.create(obj);
+        idtaxi = expResult.getIdtaxi();
         API_TAXI result = instance.read(idtaxi);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("Id de taxi différents", expResult.getIdtaxi(), result.getIdtaxi());
+        assertEquals("Immatriculations différentes", expResult.getImmatriculation(), result.getImmatriculation());
+        assertEquals("Carburants différents", expResult.getCarburant(), result.getCarburant());
+        assertEquals("Prix au km différents", expResult.getPrixkm(), result.getPrixkm(), 0);
+        assertEquals("Descriptions différentes", expResult.getDescription(), result.getDescription());
+
+        try {
+            result = instance.read(0);
+            fail("Exception d'id inconnu non générée! ");
+        } catch (SQLException e) {
+            instance.deleteSolo(result);
+        }
     }
 
     /**
@@ -109,14 +123,76 @@ public class TaxiDAOTest {
      */
     //@Test
     public void testUpdate() throws Exception {
+        //test of a simple update
         System.out.println("update");
-        API_TAXI obj = null;
         TaxiDAO instance = new TaxiDAO();
-        API_TAXI expResult = null;
+        instance.setConnection(dbConnect);
+        API_TAXI obj = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
+        obj = instance.create(obj);
+        obj.setImmatriculation("ImmaTest2");
+        obj.setCarburant("Car2");
+        obj.setPrixkm(2);
+        obj.setDescription("DescriTest2");
+
+        API_TAXI expResult = obj;
         API_TAXI result = instance.update(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        assertEquals("Id de taxi différents", expResult.getIdtaxi(), result.getIdtaxi());
+        assertEquals("Immatriculations différentes", expResult.getImmatriculation(), result.getImmatriculation());
+        assertEquals("Carburants différents", expResult.getCarburant(), result.getCarburant());
+        assertEquals("Prix au km différents", expResult.getPrixkm(), result.getPrixkm(), 0);
+        assertEquals("Descriptions différentes", expResult.getDescription(), result.getDescription());
+
+        instance.deleteSolo(obj);
+
+        //Test of an update based on an existing object
+        API_TAXI obj1 = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
+        obj1 = instance.create(obj1);
+        API_TAXI obj2 = new API_TAXI(0, "ImmaTest2", "Carb", 1, "DescriTest");
+        obj2 = instance.create(obj2);
+
+        obj1.setImmatriculation("ImmaTest2");
+
+        try {
+            instance.update(obj1);
+            fail("Exception de doublon non générée");
+        } catch (SQLException e) {
+            instance.deleteSolo(obj1);
+            instance.deleteSolo(obj2);
+        }
+
+        //test of an update based on an incorrect CP
+        API_TAXI obj3 = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
+        obj3 = instance.create(obj3);
+
+        obj3.setPrixkm(-1);
+
+        try {
+            instance.update(obj3);
+            fail("Exception de check du prix au km non déclanchée");
+        } catch (SQLException e) {
+            instance.deleteSolo(obj3);
+        }
+    }
+
+    /**
+     * Test of deleteSolo method, of class TaxiDAO.
+     */
+    @Test
+    public void testDeleteSolo() throws Exception {
+        System.out.println("deleteSolo");
+        TaxiDAO instance = new TaxiDAO();
+        instance.setConnection(dbConnect);
+        API_TAXI obj = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
+        obj = instance.create(obj);
+        int idtaxi = obj.getIdtaxi();
+        instance.deleteSolo(obj);
+        try {
+            instance.read(idtaxi);
+            fail("Exception de record introuvable non générée");
+        } catch (SQLException e) {
+            
+        }
     }
 
     /**
@@ -128,19 +204,6 @@ public class TaxiDAOTest {
         API_TAXI obj = null;
         TaxiDAO instance = new TaxiDAO();
         instance.delete(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of deleteSolo method, of class TaxiDAO.
-     */
-    //@Test
-    public void testDeleteSolo() throws Exception {
-        System.out.println("deleteSolo");
-        API_TAXI obj = null;
-        TaxiDAO instance = new TaxiDAO();
-        instance.deleteSolo(obj);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -219,5 +282,5 @@ public class TaxiDAOTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }
