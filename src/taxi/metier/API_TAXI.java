@@ -1,5 +1,8 @@
 
 package taxi.metier;
+
+import java.util.Objects;
+
 /**
  * classe métier de gestion d'un taxi
  * @author Van Gysegem Allison
@@ -144,6 +147,39 @@ public class API_TAXI {
     @Override
     public String toString() {
         return "API_TAXI{" + "idtaxi=" + idtaxi + ", immatriculation=" + immatriculation + ", carburant=" + carburant + ", prixkm=" + prixkm + ", description=" + description + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final API_TAXI other = (API_TAXI) obj;
+        if (Float.floatToIntBits(this.prixkm) != Float.floatToIntBits(other.prixkm)) {
+            return false;
+        }
+        if (!Objects.equals(this.immatriculation, other.immatriculation)) {
+            return false;
+        }
+        if (!Objects.equals(this.carburant, other.carburant)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        return true;
     }
 
     
