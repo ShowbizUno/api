@@ -180,6 +180,7 @@ public class TaxiDAOTest {
      */
     @Test
     public void testDeleteSolo() throws Exception {
+        //Test of a simple delete
         System.out.println("deleteSolo");
         TaxiDAO instance = new TaxiDAO();
         instance.setConnection(dbConnect);
@@ -193,6 +194,53 @@ public class TaxiDAOTest {
         } catch (SQLException e) {
             
         }
+    }
+    
+    /**
+     * Test of rechDesc method, of class TaxiDAO.
+     */
+    @Test
+    public void testRechDesc() throws Exception {
+        //Test of a research based on a part of description
+        //Test sur l'indexOf non concluant dans un autre fichier de test sur un autre ordinateur(le mien ayant été indisponible quelques heures)
+        //J'ai essayé d'aider Gregoire Jacquemin sur un de ses pb et ai vu son indexOf différent du mien
+        //J'ai donc recopié celui-là et le test a fonctionné. Aide inconsciente mais existante.
+        System.out.println("rechDesc");
+        TaxiDAO instance = new TaxiDAO();
+        instance.setConnection(dbConnect);
+        API_TAXI obj1 = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
+        API_TAXI obj2 = new API_TAXI(0, "ImmaTest2", "Car2", 2, "DescriTest");
+        obj1=instance.create(obj1);
+        obj2=instance.create(obj2);
+        String desc = "DescriTest";
+        List<API_TAXI> result = instance.rechDesc(desc);
+       if(result.indexOf(obj1)<0){
+           fail ("Cet objet est introuvable: "+obj1);
+       }
+       if(result.indexOf(obj2)<0){
+           fail("Cet objet est introuvable: "+obj2);
+       }
+       instance.deleteSolo(obj1);
+       instance.deleteSolo(obj2);
+    }
+    
+     /**
+     * Test of rechloc method, of class TaxiDAO.
+     */
+    //@Test
+    public void testRechloc() throws Exception {
+        //Test on a research based on a view
+        //TODO CRUD Clienttaxi et CRUD adressestaxi
+        System.out.println("rechloc");
+        TaxiDAO instance = new TaxiDAO();
+        instance.setConnection(dbConnect);
+        
+        int idloc = 0;
+        
+        List<vue_adresses> expResult = null;
+        List<vue_adresses> result = instance.rechloc(idloc);
+        assertEquals(expResult, result);
+        
     }
 
     /**
@@ -223,33 +271,7 @@ public class TaxiDAOTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of rechDesc method, of class TaxiDAO.
-     */
-    @Test
-    public void testRechDesc() throws Exception {
-        //Test of a research based on a part of description
-        //Test sur l'indexOf non concluant dans un autre fichier de test sur un autre ordinateur(le mien ayant été indisponible quelques heures)
-        //J'ai essayé d'aider Gregoire Jacquemin sur un de ses pb et ai vu son indexOf différent du mien
-        //J'ai donc recopié celui-là et le test a fonctionné. Aide inconsciente mais existante.
-        System.out.println("rechDesc");
-        TaxiDAO instance = new TaxiDAO();
-        instance.setConnection(dbConnect);
-        API_TAXI obj1 = new API_TAXI(0, "ImmaTest", "Carb", 1, "DescriTest");
-        API_TAXI obj2 = new API_TAXI(0, "ImmaTest2", "Car2", 2, "DescriTest");
-        obj1=instance.create(obj1);
-        obj2=instance.create(obj2);
-        String desc = "DescriTest";
-        List<API_TAXI> result = instance.rechDesc(desc);
-       if(result.indexOf(obj1)<0){
-           fail ("Cet objet est introuvable: "+obj1);
-       }
-       if(result.indexOf(obj2)<0){
-           fail("Cet objet est introuvable: "+obj2);
-       }
-       instance.deleteSolo(obj1);
-       instance.deleteSolo(obj2);
-    }
+    
 
     /**
      * Test of rechImma method, of class TaxiDAO.
@@ -266,20 +288,7 @@ public class TaxiDAOTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of rechloc method, of class TaxiDAO.
-     */
-    //@Test
-    public void testRechloc() throws Exception {
-        System.out.println("rechloc");
-        int idloc = 0;
-        TaxiDAO instance = new TaxiDAO();
-        List<vue_adresses> expResult = null;
-        List<vue_adresses> result = instance.rechloc(idloc);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+   
 
     /**
      * Test of prixTotalLoc method, of class TaxiDAO.

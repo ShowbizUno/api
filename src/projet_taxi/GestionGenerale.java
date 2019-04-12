@@ -20,7 +20,7 @@ public class GestionGenerale {
         Scanner sc = new Scanner(System.in);
         do {
             System.out.println("Menu principal");
-            System.out.println("1.Taxis\n2.Clients\n5. Fin");
+            System.out.println("1.Taxis\n2.Clients\n3.Adresses\n5. Fin");
             System.out.println("Votre réponse: ");
             rep = Integer.parseInt(sc.nextLine());
 
@@ -32,7 +32,7 @@ public class GestionGenerale {
                     appelClient();
                     break;
                 case 3:
-                    System.out.println("En cours de constuction");
+                    appelAdresses();
                     break;
                 case 4:
                     System.out.println("En cours de constuction");
@@ -56,6 +56,11 @@ public class GestionGenerale {
     public void appelClient(){
         GestionClients gc = new GestionClients();
         gc.gestionClients();
+    }
+    
+    public void appelAdresses(){
+        GestionAdresses ga=new GestionAdresses();
+        ga.gestionAdresses();
     }
 
     public static void main(String[] args) {

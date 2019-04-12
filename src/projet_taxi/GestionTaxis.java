@@ -116,7 +116,7 @@ public class GestionTaxis {
         try {
             System.out.println("Veuillez entrer l'immatriculation du taxi recherché: ");
             String imma = sc.nextLine();
-            taxi = ((TaxiDAO) taxiDAO).rechImma(imma);
+            taxi =  taxiDAO.rechImma(imma);
             System.out.println("Voici le nouveau taxi actuel: " + taxi);
         } catch (SQLException e) {
             System.out.println("Erreur " + e.getMessage());
@@ -156,13 +156,11 @@ public class GestionTaxis {
 
             System.out.println("Carburant du taxi recherché: " + taxi.getCarburant());
             System.out.println("Entrez le carburant: ");
-
             String carb = sc.nextLine();
             taxi.setCarburant(carb);
 
             System.out.println("Prix au kilomètre du taxi recherché: " + taxi.getPrixkm());
             System.out.println("Entrez le prix au km: ");
-
             float prixkm = sc.nextFloat();
             taxi.setPrixkm(prixkm);
 
@@ -171,7 +169,7 @@ public class GestionTaxis {
             sc.skip("\n");
             String desc = sc.nextLine();
             taxi.setDescription(desc);
-
+            
             taxiDAO.update(taxi);
             System.out.println(taxi);
 
@@ -190,10 +188,10 @@ public class GestionTaxis {
         int rep = -1;
         try {
             System.out.println("Suppression du taxi actuel");
-            recup = ((TaxiDAO) taxiDAO).rechercheLocations(taxi);
+            recup = taxiDAO.rechercheLocations(taxi);
 
             if (recup == 0) {
-                ((TaxiDAO) taxiDAO).deleteSolo(taxi);
+                taxiDAO.deleteSolo(taxi);
             } else if (recup == 1) {
                 System.out.println("Voulez-vous bien supprimer ce taxi ainsi que ses locations? 1/Oui 2/Non");
                 rep = Integer.parseInt(sc.nextLine());
