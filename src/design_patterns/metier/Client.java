@@ -65,6 +65,18 @@ public class Client {
     public void setIdadr(int idadr) {
         this.idadr = idadr;
     }
+
+    public Set<Location> getLocation() {
+        return location;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
     
     
 }
