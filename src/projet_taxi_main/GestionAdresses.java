@@ -1,5 +1,5 @@
 //TODO imports
-package projet_taxi;
+package projet_taxi_main;
 
 /**
  *

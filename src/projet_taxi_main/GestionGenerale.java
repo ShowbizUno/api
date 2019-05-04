@@ -1,4 +1,4 @@
-package projet_taxi;
+package projet_taxi_main;
 
 import java.util.Scanner;
 
