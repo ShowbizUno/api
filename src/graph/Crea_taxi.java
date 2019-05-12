@@ -5,17 +5,26 @@
  */
 package graph;
 
+import javax.swing.JOptionPane;
+import taxi.DAO.TaxiDAO;
+import taxi.metier.API_TAXI;
 /**
  *
  * @author Allison
  */
 public class Crea_taxi extends javax.swing.JPanel {
 
+    TaxiDAO taxiDAO=null;
+    
     /**
      * Creates new form Crea_taxi
      */
     public Crea_taxi() {
         initComponents();
+    }
+    
+    public void setTaxiDAO(TaxiDAO taxiDAO){
+        this.taxiDAO=taxiDAO;
     }
 
     /**
@@ -27,19 +36,164 @@ public class Crea_taxi extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lvl_imma = new javax.swing.JLabel();
+        lbl_id_taxi = new javax.swing.JLabel();
+        lbl_carb = new javax.swing.JLabel();
+        lbl_prixkm = new javax.swing.JLabel();
+        lbl_desc = new javax.swing.JLabel();
+        txt_id_taxi = new javax.swing.JTextField();
+        txt_carb = new javax.swing.JTextField();
+        txt_imma = new javax.swing.JTextField();
+        txt_prixkm = new javax.swing.JTextField();
+        txt_desc = new javax.swing.JTextField();
+        btn_créer = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        lvl_imma.setText("immatriculation");
+
+        lbl_id_taxi.setLabelFor(txt_id_taxi);
+        lbl_id_taxi.setText("n° d'identifiant de taxi:");
+
+        lbl_carb.setText("carburant");
+
+        lbl_prixkm.setText("prix au km");
+
+        lbl_desc.setText("description");
+
+        txt_id_taxi.setEditable(false);
+        txt_id_taxi.setBackground(new java.awt.Color(153, 153, 153));
+        txt_id_taxi.setMinimumSize(new java.awt.Dimension(50, 20));
+        txt_id_taxi.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_id_taxi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_id_taxiActionPerformed(evt);
+            }
+        });
+
+        txt_carb.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_carb.setMinimumSize(new java.awt.Dimension(50, 20));
+        txt_carb.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        txt_imma.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_imma.setMinimumSize(new java.awt.Dimension(50, 20));
+        txt_imma.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        txt_prixkm.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_prixkm.setMinimumSize(new java.awt.Dimension(50, 20));
+        txt_prixkm.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        txt_desc.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txt_desc.setMinimumSize(new java.awt.Dimension(50, 20));
+        txt_desc.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        btn_créer.setText("Créer ce taxi");
+        btn_créer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_créerActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Création d'un taxi");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_carb)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lvl_imma)
+                            .addComponent(lbl_prixkm)
+                            .addComponent(lbl_desc)
+                            .addComponent(lbl_id_taxi))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_prixkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_carb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_imma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_id_taxi, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 285, Short.MAX_VALUE)
+                        .addComponent(btn_créer))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_id_taxi)
+                    .addComponent(txt_id_taxi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lvl_imma)
+                    .addComponent(txt_imma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_carb)
+                    .addComponent(txt_carb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_prixkm)
+                    .addComponent(txt_prixkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_desc)
+                    .addComponent(txt_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(btn_créer, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txt_id_taxiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_taxiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_id_taxiActionPerformed
+
+    private void btn_créerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_créerActionPerformed
+        try{  
+       String imma=txt_imma.getText();
+       String carb=txt_carb.getText();
+       float prixkm=Float.parseFloat(txt_prixkm.getText());
+       String desc= txt_desc.getText();
+       API_TAXI t1 = new API_TAXI(0,imma,carb,prixkm,desc);
+       t1=taxiDAO.create(t1);
+       txt_id_taxi.setText(""+t1.getIdtaxi());
+       JOptionPane.showMessageDialog(this,"taxi créé","succès",JOptionPane.INFORMATION_MESSAGE);
+       
+     }
+     catch(Exception e){
+        JOptionPane.showMessageDialog(this,e.getMessage(),"ERREUR",JOptionPane.ERROR_MESSAGE);
+     }
+
+    }//GEN-LAST:event_btn_créerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_créer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbl_carb;
+    private javax.swing.JLabel lbl_desc;
+    private javax.swing.JLabel lbl_id_taxi;
+    private javax.swing.JLabel lbl_prixkm;
+    private javax.swing.JLabel lvl_imma;
+    private javax.swing.JTextField txt_carb;
+    private javax.swing.JTextField txt_desc;
+    private javax.swing.JTextField txt_id_taxi;
+    private javax.swing.JTextField txt_imma;
+    private javax.swing.JTextField txt_prixkm;
     // End of variables declaration//GEN-END:variables
 }

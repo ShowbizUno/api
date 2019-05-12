@@ -1,5 +1,6 @@
 
-package design_patterns.metier;
+package design_patterns.metier.observer;
+
 
 import java.util.HashSet;
 import java.util.Objects;

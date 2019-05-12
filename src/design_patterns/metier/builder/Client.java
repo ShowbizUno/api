@@ -1,5 +1,5 @@
+package design_patterns.metier.builder;
 
-package design_patterns.metier;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,23 +8,32 @@ import java.util.Set;
  *
  * @author Allison
  */
-public class Client {
+public class Client{
+
     private int idclient;
-  
+
     private String nom;
-    
+
     private String prenom;
-    
+
     private String tel;
-   
-    private int idadr;
+
+    private Adresse adresse;
     
     private Set<Location> location=new HashSet<>();
-    
-    private Adresse adresse;
+
 
     public Client() {
     }
+
+    public Client(int idclient, String nom, String prenom, String tel, Adresse adresse) {
+        this.idclient = idclient;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.tel = tel;
+        this.adresse = adresse;
+    }
+
 
     public int getIdclient() {
         return idclient;
@@ -58,18 +67,6 @@ public class Client {
         this.tel = tel;
     }
 
-    public int getIdadr() {
-        return idadr;
-    }
-
-    public void setIdadr(int idadr) {
-        this.idadr = idadr;
-    }
-
-    public Set<Location> getLocation() {
-        return location;
-    }
-
     public Adresse getAdresse() {
         return adresse;
     }
@@ -77,6 +74,7 @@ public class Client {
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
     }
-    
-    
+
+
+
 }

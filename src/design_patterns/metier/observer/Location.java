@@ -1,5 +1,6 @@
 
-package design_patterns.metier;
+package design_patterns.metier.observer;
+
 
 import java.time.LocalDate;
 
@@ -7,25 +8,15 @@ import java.time.LocalDate;
  *
  * @author Allison
  */
-public class Location {
+public class Location extends Subject{
  
   private int idloc;
-  
-  private LocalDate dateloc;
  
   private int kmtotal;
  
   private float acompte;
  
   private float total;
- 
-  private int adrdebut;
- 
-  private int adrfin;
- 
-  private int idclient;
- 
-  private int idtaxi;
   
   private Taxi vehicule;
   
@@ -39,16 +30,17 @@ public class Location {
     public Location() {
     }
 
-    public Location(int idloc, LocalDate dateloc, int kmtotal, float acompte, float total, int adrdebut, int adrfin, int idclient, int idtaxi) {
+    public Location(int idloc, int kmtotal, float acompte, float total, Taxi vehicule, Adresse adrDebut, Adresse adrFin, design_patterns.metier.observer.Client client) {
         this.idloc = idloc;
-        this.dateloc = dateloc;
         this.kmtotal = kmtotal;
         this.acompte = acompte;
         this.total = total;
-        this.adrdebut = adrdebut;
-        this.adrfin = adrfin;
-        this.idclient = idclient;
-        this.idtaxi = idtaxi;
+        this.vehicule = vehicule;
+        this.adrDebut = adrDebut;
+        this.adrFin = adrFin;
+        this.client = client;
+        
+        myObservers.add(client);
     }
 
     public int getIdloc() {
@@ -57,14 +49,6 @@ public class Location {
 
     public void setIdloc(int idloc) {
         this.idloc = idloc;
-    }
-
-    public LocalDate getDateloc() {
-        return dateloc;
-    }
-
-    public void setDateloc(LocalDate dateloc) {
-        this.dateloc = dateloc;
     }
 
     public int getKmtotal() {
@@ -90,37 +74,10 @@ public class Location {
     public void setTotal(float total) {
         this.total = total;
     }
-
-    public int getAdrdebut() {
-        return adrdebut;
-    }
-
-    public void setAdrdebut(int adrdebut) {
-        this.adrdebut = adrdebut;
-    }
-
-    public int getAdrfin() {
-        return adrfin;
-    }
-
-    public void setAdrfin(int adrfin) {
-        this.adrfin = adrfin;
-    }
-
-    public int getIdclient() {
-        return idclient;
-    }
-
-    public void setIdclient(int idclient) {
-        this.idclient = idclient;
-    }
-
-    public int getIdtaxi() {
-        return idtaxi;
-    }
-
-    public void setIdtaxi(int idtaxi) {
-        this.idtaxi = idtaxi;
+    
+    @Override
+    public String getNotification() {
+        return "le nouvel idtaxi de la location numéro "+idloc+" est "+vehicule.getIdtaxi();
     }
 
     public Taxi getVehicule() {
@@ -129,6 +86,7 @@ public class Location {
 
     public void setVehicule(Taxi vehicule) {
         this.vehicule = vehicule;
+        notifyObservers();
     }
 
     public Adresse getAdrDebut() {
@@ -154,11 +112,10 @@ public class Location {
     public void setClient(Client client) {
         this.client = client;
     }
-    
 
     @Override
     public String toString() {
-        return "Location{" + "idloc=" + idloc + ", dateloc=" + dateloc + ", kmtotal=" + kmtotal + ", acompte=" + acompte + ", total=" + total + ", adrdebut=" + adrdebut + ", adrfin=" + adrfin + ", idclient=" + idclient + ", idtaxi=" + idtaxi + ", vehicule=" + vehicule + '}';
+        return "Location{" + "idloc=" + idloc + ", kmtotal=" + kmtotal + ", acompte=" + acompte + ", total=" + total + ", vehicule=" + vehicule + ", adrDebut=" + adrDebut + ", adrFin=" + adrFin + ", client=" + client + '}';
     }
 
     @Override
@@ -185,5 +142,6 @@ public class Location {
         }
         return true;
     }
+
   
 }

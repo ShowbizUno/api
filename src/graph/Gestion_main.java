@@ -25,7 +25,7 @@ public class Gestion_main extends javax.swing.JFrame {
     public Gestion_main() {
         initComponents();
         cardl=(CardLayout)this.getContentPane().getLayout();
-        cardl.show(this.getContentPane(), "background2");
+        cardl.show(this.getContentPane(), "card2");
         
     }
 
@@ -48,7 +48,6 @@ public class Gestion_main extends javax.swing.JFrame {
         main_taxi = new javax.swing.JMenu();
         create_taxi = new javax.swing.JMenuItem();
         update_taxi = new javax.swing.JMenuItem();
-        delete_taxi = new javax.swing.JMenuItem();
         read_main = new javax.swing.JMenu();
         read_id = new javax.swing.JMenuItem();
         read_descri = new javax.swing.JMenuItem();
@@ -142,9 +141,6 @@ public class Gestion_main extends javax.swing.JFrame {
         update_taxi.setText("Modifier");
         main_taxi.add(update_taxi);
 
-        delete_taxi.setText("Supprimer");
-        main_taxi.add(delete_taxi);
-
         read_main.setText("Rechercher");
 
         read_id.setText("sur l'id");
@@ -201,7 +197,6 @@ public class Gestion_main extends javax.swing.JFrame {
     private graph.Background background2;
     private graph.Crea_taxi crea_taxi1;
     private javax.swing.JMenuItem create_taxi;
-    private javax.swing.JMenuItem delete_taxi;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu main_taxi;
     private graph.Modif_taxi modif_taxi1;
