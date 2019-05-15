@@ -5,6 +5,11 @@
  */
 package graph;
 
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import myconnections.DBConnection;
+import taxi.DAO.TaxiDAO;
+
 /**
  *
  * @author Allison
@@ -12,10 +17,20 @@ package graph;
 public class Test_rech_desc extends javax.swing.JFrame {
 
     /**
-     * Creates new form Test_modif_desc
+     * Creates new form Test_rech_desc
      */
     public Test_rech_desc() {
         initComponents();
+        Connection dbConnect = DBConnection.getConnection();
+        if (dbConnect == null) {
+            System.out.println("connection invalide");
+            JOptionPane.showMessageDialog(this,"connexion invalide","ERREUR",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        TaxiDAO taxiDAO = new TaxiDAO();
+        taxiDAO.setConnection(dbConnect);
+        recherche_taxi_descri1.setTaxiDAO(taxiDAO);
+        
     }
 
     /**
@@ -27,65 +42,9 @@ public class Test_rech_desc extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbl_desc = new javax.swing.JLabel();
-        txt_id_taxi = new javax.swing.JTextField();
-        txt_carb = new javax.swing.JTextField();
-        txt_imma = new javax.swing.JTextField();
-        lvl_imma = new javax.swing.JLabel();
-        txtcp = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        btn_rech_modif = new javax.swing.JButton();
-        lbl_id_taxi = new javax.swing.JLabel();
-        txt_desc = new javax.swing.JTextField();
-        lbl_carb = new javax.swing.JLabel();
-        lbl_prixkm = new javax.swing.JLabel();
+        recherche_taxi_descri1 = new graph.Recherche_taxi_descri();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        lbl_desc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_desc.setText("Description :");
-
-        txt_id_taxi.setEditable(false);
-        txt_id_taxi.setBackground(new java.awt.Color(153, 153, 153));
-        txt_id_taxi.setBorder(null);
-        txt_id_taxi.setMinimumSize(new java.awt.Dimension(50, 20));
-        txt_id_taxi.setPreferredSize(new java.awt.Dimension(150, 30));
-
-        txt_carb.setEditable(false);
-        txt_carb.setBackground(new java.awt.Color(153, 153, 153));
-        txt_carb.setMinimumSize(new java.awt.Dimension(50, 20));
-        txt_carb.setPreferredSize(new java.awt.Dimension(150, 30));
-
-        txt_imma.setEditable(false);
-        txt_imma.setBackground(new java.awt.Color(153, 153, 153));
-        txt_imma.setMinimumSize(new java.awt.Dimension(50, 20));
-        txt_imma.setPreferredSize(new java.awt.Dimension(150, 30));
-
-        lvl_imma.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lvl_imma.setText("N° d'immatriculation du taxi :");
-
-        txtcp.setEditable(false);
-        txtcp.setBackground(new java.awt.Color(153, 153, 153));
-        txtcp.setMinimumSize(new java.awt.Dimension(50, 20));
-        txtcp.setPreferredSize(new java.awt.Dimension(150, 30));
-
-        jLabel1.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Recherche d'un taxi sur sa description");
-
-        btn_rech_modif.setText("Rechercher ce taxi");
-
-        lbl_id_taxi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_id_taxi.setText("N° d'identifiant du taxi :");
-
-        txt_desc.setMinimumSize(new java.awt.Dimension(50, 20));
-        txt_desc.setPreferredSize(new java.awt.Dimension(150, 30));
-
-        lbl_carb.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_carb.setText("Nom du carburant :");
-
-        lbl_prixkm.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_prixkm.setText("Prix au km :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,58 +52,15 @@ public class Test_rech_desc extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_id_taxi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lvl_imma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_carb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_prixkm, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtcp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_carb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_imma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_id_taxi, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_rech_modif)
-                .addGap(32, 32, 32))
+                .addComponent(recherche_taxi_descri1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_id_taxi)
-                    .addComponent(txt_id_taxi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lvl_imma)
-                    .addComponent(txt_imma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_carb)
-                    .addComponent(txt_carb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_prixkm)
-                    .addComponent(txtcp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_desc)
-                    .addComponent(txt_desc, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btn_rech_modif, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(recherche_taxi_descri1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -176,7 +92,6 @@ public class Test_rech_desc extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Test_rech_desc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -187,17 +102,6 @@ public class Test_rech_desc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_rech_modif;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lbl_carb;
-    private javax.swing.JLabel lbl_desc;
-    private javax.swing.JLabel lbl_id_taxi;
-    private javax.swing.JLabel lbl_prixkm;
-    private javax.swing.JLabel lvl_imma;
-    private javax.swing.JTextField txt_carb;
-    private javax.swing.JTextField txt_desc;
-    private javax.swing.JTextField txt_id_taxi;
-    private javax.swing.JTextField txt_imma;
-    private javax.swing.JTextField txtcp;
+    private graph.Recherche_taxi_descri recherche_taxi_descri1;
     // End of variables declaration//GEN-END:variables
 }

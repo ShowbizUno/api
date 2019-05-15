@@ -176,7 +176,7 @@
           <Font name="Century Schoolbook" size="18" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Recherche d&apos;un taxi sur son identifiant"/>
+        <Property name="text" type="java.lang.String" value="Gestion d&apos;un taxi sur son identifiant"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_rech_modif">

@@ -82,7 +82,7 @@ public class Recherche_taxi_id extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Recherche d'un taxi sur son identifiant");
+        jLabel1.setText("Gestion d'un taxi sur son identifiant");
 
         btn_rech_modif.setText("Rechercher ce taxi");
         btn_rech_modif.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +186,7 @@ public class Recherche_taxi_id extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_rech_modifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rech_modifActionPerformed
+
         try {
             if (!txt_id_taxi.getText().isEmpty()) {
                 int id_taxi = Integer.parseInt(txt_id_taxi.getText());
@@ -206,15 +207,18 @@ public class Recherche_taxi_id extends javax.swing.JPanel {
 
     private void btn_majActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_majActionPerformed
         try {
-            int id_taxi = Integer.parseInt(txt_id_taxi.getText());
-            String imma = txt_imma.getText();
-            String carb = txt_carb.getText();
-            float prixkm = Float.parseFloat(txt_prixkm.getText());
-            String desc = txt_desc.getText();
-            API_TAXI t1 = new API_TAXI(id_taxi, imma, carb, prixkm, desc);
-            taxiDAO.update(t1);
-            JOptionPane.showMessageDialog(this, "Taxi mis à jour", "succès", JOptionPane.INFORMATION_MESSAGE);
-
+            if (!txt_id_taxi.getText().isEmpty()) {
+                int id_taxi = Integer.parseInt(txt_id_taxi.getText());
+                String imma = txt_imma.getText();
+                String carb = txt_carb.getText();
+                float prixkm = Float.parseFloat(txt_prixkm.getText());
+                String desc = txt_desc.getText();
+                API_TAXI t1 = new API_TAXI(id_taxi, imma, carb, prixkm, desc);
+                taxiDAO.update(t1);
+                JOptionPane.showMessageDialog(this, "Taxi mis à jour", "succès", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Id_taxi est vide, veuillez le remplir!", "ERREUR", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "ERREUR", JOptionPane.ERROR_MESSAGE);
         }

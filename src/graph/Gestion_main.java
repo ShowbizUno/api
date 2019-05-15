@@ -21,11 +21,25 @@ public class Gestion_main extends javax.swing.JFrame {
      * Creates new form Gestion_main
      */
     CardLayout cardl;
+
     
     public Gestion_main() {
         initComponents();
         cardl=(CardLayout)this.getContentPane().getLayout();
         cardl.show(this.getContentPane(), "card2");
+        
+        Connection dbConnect = DBConnection.getConnection();
+        if (dbConnect == null) {
+            System.out.println("connection invalide");
+            JOptionPane.showMessageDialog(this,"connexion invalide","ERREUR",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        TaxiDAO taxiDAO = new TaxiDAO();
+        taxiDAO.setConnection(dbConnect);
+        crea_taxi2.setTaxiDAO(taxiDAO);
+        recherche_taxi_descri2.setTaxiDAO(taxiDAO);
+        recherche_taxi_id2.setTaxiDAO(taxiDAO);
+       
         
     }
 
@@ -39,18 +53,14 @@ public class Gestion_main extends javax.swing.JFrame {
     private void initComponents() {
 
         background2 = new graph.Background();
-        crea_taxi1 = new graph.Crea_taxi();
-        modif_taxi1 = new graph.Modif_taxi();
-        suppr_taxi1 = new graph.Suppr_taxi();
-        recherche_taxi_id1 = new graph.Recherche_taxi_id();
-        recherche_taxi_descri1 = new graph.Recherche_taxi_descri();
+        recherche_taxi_descri2 = new graph.Recherche_taxi_descri();
+        crea_taxi2 = new graph.Crea_taxi();
+        recherche_taxi_id2 = new graph.Recherche_taxi_id();
         jMenuBar2 = new javax.swing.JMenuBar();
         main_taxi = new javax.swing.JMenu();
         create_taxi = new javax.swing.JMenuItem();
         update_taxi = new javax.swing.JMenuItem();
-        read_main = new javax.swing.JMenu();
-        read_id = new javax.swing.JMenuItem();
-        read_descri = new javax.swing.JMenuItem();
+        rech_desc_taxi = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -59,97 +69,43 @@ public class Gestion_main extends javax.swing.JFrame {
         background2.setLayout(background2Layout);
         background2Layout.setHorizontalGroup(
             background2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
         );
         background2Layout.setVerticalGroup(
             background2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 444, Short.MAX_VALUE)
         );
 
         getContentPane().add(background2, "card2");
-
-        javax.swing.GroupLayout crea_taxi1Layout = new javax.swing.GroupLayout(crea_taxi1);
-        crea_taxi1.setLayout(crea_taxi1Layout);
-        crea_taxi1Layout.setHorizontalGroup(
-            crea_taxi1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        crea_taxi1Layout.setVerticalGroup(
-            crea_taxi1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(crea_taxi1, "card5");
-
-        javax.swing.GroupLayout modif_taxi1Layout = new javax.swing.GroupLayout(modif_taxi1);
-        modif_taxi1.setLayout(modif_taxi1Layout);
-        modif_taxi1Layout.setHorizontalGroup(
-            modif_taxi1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        modif_taxi1Layout.setVerticalGroup(
-            modif_taxi1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(modif_taxi1, "card6");
-
-        javax.swing.GroupLayout suppr_taxi1Layout = new javax.swing.GroupLayout(suppr_taxi1);
-        suppr_taxi1.setLayout(suppr_taxi1Layout);
-        suppr_taxi1Layout.setHorizontalGroup(
-            suppr_taxi1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        suppr_taxi1Layout.setVerticalGroup(
-            suppr_taxi1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(suppr_taxi1, "card3");
-
-        javax.swing.GroupLayout recherche_taxi_id1Layout = new javax.swing.GroupLayout(recherche_taxi_id1);
-        recherche_taxi_id1.setLayout(recherche_taxi_id1Layout);
-        recherche_taxi_id1Layout.setHorizontalGroup(
-            recherche_taxi_id1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        recherche_taxi_id1Layout.setVerticalGroup(
-            recherche_taxi_id1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(recherche_taxi_id1, "card4");
-
-        javax.swing.GroupLayout recherche_taxi_descri1Layout = new javax.swing.GroupLayout(recherche_taxi_descri1);
-        recherche_taxi_descri1.setLayout(recherche_taxi_descri1Layout);
-        recherche_taxi_descri1Layout.setHorizontalGroup(
-            recherche_taxi_descri1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        recherche_taxi_descri1Layout.setVerticalGroup(
-            recherche_taxi_descri1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(recherche_taxi_descri1, "card7");
+        getContentPane().add(recherche_taxi_descri2, "cardRechDesc");
+        getContentPane().add(crea_taxi2, "cardCreate");
+        getContentPane().add(recherche_taxi_id2, "cardGestion");
 
         main_taxi.setText("Taxi");
 
-        create_taxi.setText("Ajouter");
+        create_taxi.setText("Ajout");
+        create_taxi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                create_taxiActionPerformed(evt);
+            }
+        });
         main_taxi.add(create_taxi);
 
-        update_taxi.setText("Modifier");
+        update_taxi.setText("Gestion");
+        update_taxi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_taxiActionPerformed(evt);
+            }
+        });
         main_taxi.add(update_taxi);
 
-        read_main.setText("Rechercher");
-
-        read_id.setText("sur l'id");
-        read_main.add(read_id);
-
-        read_descri.setText("sur la description");
-        read_main.add(read_descri);
-
-        main_taxi.add(read_main);
+        rech_desc_taxi.setText("Recherche description");
+        rech_desc_taxi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rech_desc_taxiActionPerformed(evt);
+            }
+        });
+        main_taxi.add(rech_desc_taxi);
 
         jMenuBar2.add(main_taxi);
 
@@ -157,6 +113,21 @@ public class Gestion_main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void create_taxiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_taxiActionPerformed
+        setTitle("Création taxi");
+        cardl.show(this.getContentPane(), "cardCreate");
+    }//GEN-LAST:event_create_taxiActionPerformed
+
+    private void update_taxiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_taxiActionPerformed
+        setTitle("Gestion taxi");
+        cardl.show(this.getContentPane(), "cardGestion");
+    }//GEN-LAST:event_update_taxiActionPerformed
+
+    private void rech_desc_taxiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rech_desc_taxiActionPerformed
+        setTitle("Recherche taxi sur la description");
+        cardl.show(this.getContentPane(), "cardRechDesc");
+    }//GEN-LAST:event_rech_desc_taxiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,17 +166,13 @@ public class Gestion_main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private graph.Background background2;
-    private graph.Crea_taxi crea_taxi1;
+    private graph.Crea_taxi crea_taxi2;
     private javax.swing.JMenuItem create_taxi;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu main_taxi;
-    private graph.Modif_taxi modif_taxi1;
-    private javax.swing.JMenuItem read_descri;
-    private javax.swing.JMenuItem read_id;
-    private javax.swing.JMenu read_main;
-    private graph.Recherche_taxi_descri recherche_taxi_descri1;
-    private graph.Recherche_taxi_id recherche_taxi_id1;
-    private graph.Suppr_taxi suppr_taxi1;
+    private javax.swing.JMenuItem rech_desc_taxi;
+    private graph.Recherche_taxi_descri recherche_taxi_descri2;
+    private graph.Recherche_taxi_id recherche_taxi_id2;
     private javax.swing.JMenuItem update_taxi;
     // End of variables declaration//GEN-END:variables
 }

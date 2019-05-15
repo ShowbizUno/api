@@ -21,7 +21,7 @@ public class TaxiDAO extends DAO<API_TAXI> {
      * création d'un taxi sur base des valeurs de son objet métier
      *
      * @throws SQLException erreur de création
-     * @param obj api_taxi à créer
+     * @param obj api_taxi à créshower
      * @return taxi créé
      */
     @Override
