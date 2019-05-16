@@ -114,9 +114,11 @@ public class TaxiDAO extends DAO<API_TAXI> {
     }
 
     /**
-     * effacement du taxi sur base de son immatriculation ainsi que sa/ses locations sur base de l'identifiant du taxi
+     * effacement du taxi sur base de son immatriculation ainsi que sa/ses
+     * locations sur base de l'identifiant du taxi
      *
-     * @throws SQLException Erreur d'effacement de location ou erreur d'effacement de taxi
+     * @throws SQLException Erreur d'effacement de location ou erreur
+     * d'effacement de taxi
      * @param obj API_TAXI et API_LOCATION à effacer car liés
      */
     @Override
@@ -129,9 +131,10 @@ public class TaxiDAO extends DAO<API_TAXI> {
             pstm2.setInt(1, obj.getIdtaxi());
             int n = pstm2.executeUpdate();
             if (n == 0) {
-                throw new SQLException("aucune ligne location effacée");
+                System.out.println("aucune ligne location effacée");
+            } else {
+                System.out.println(n + " lignes de locations supprimées");
             }
-            System.out.println(n+" lignes de locations supprimées");
             pstm1.setString(1, obj.getImmatriculation());
             int nl = pstm1.executeUpdate();
             if (nl == 0) {
@@ -141,16 +144,16 @@ public class TaxiDAO extends DAO<API_TAXI> {
             //TODO si client a une location => ds le SQLException demander si on veut vraiment le del et renvoyer vers un autre void
         }
     }
-    
-  /**
+
+    /**
      * effacement du taxi sur base de son identifiant
      *
      * @throws SQLException erreur d'effacement de taxi
      * @param obj API_TAXI à effacer
      */
-    public void deleteSolo(API_TAXI obj) throws SQLException{
+    public void deleteSolo(API_TAXI obj) throws SQLException {
         String query1 = "DELETE FROM API_TAXI WHERE IDTAXI = ?";
-        try(PreparedStatement pstm=dbConnect.prepareStatement(query1)){
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query1)) {
             pstm.setInt(1, obj.getIdtaxi());
             int nl = pstm.executeUpdate();
             if (nl == 0) {
@@ -159,18 +162,19 @@ public class TaxiDAO extends DAO<API_TAXI> {
             System.out.println("Taxi supprimé");
         }
     }
-    
+
     /**
-     * méthode permettant de récupérer toutes les locations ayant un certain id_taxi
+     * méthode permettant de récupérer toutes les locations ayant un certain
+     * id_taxi
      *
      * @param obj Taxi recherché
      * @return entier variant en fonction de la recherche de location
      */
-    public int rechercheLocations(API_TAXI obj) throws SQLException{
-        String query1="select * from api_locationtaxi where idtaxi=?";
-        try(PreparedStatement pstm=dbConnect.prepareStatement(query1)){
+    public int rechercheLocations(API_TAXI obj) throws SQLException {
+        String query1 = "select * from api_locationtaxi where idtaxi=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query1)) {
             pstm.setInt(1, obj.getIdtaxi());
-            
+
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
                     System.out.println("Il existe au moins une location liée à ce taxi");
@@ -220,7 +224,7 @@ public class TaxiDAO extends DAO<API_TAXI> {
             }
         }
     }
-    
+
     /**
      * récupération des données d'un taxi sur base de son immatriculation
      *
@@ -228,14 +232,13 @@ public class TaxiDAO extends DAO<API_TAXI> {
      * @param imma immatriculation du taxi
      * @return API_TAXI trouvé
      */
-
-    public API_TAXI rechImma(String imma) throws SQLException{
-        String req= "select * from api_taxi where immatriculation=?";
-        try(PreparedStatement pstm = dbConnect.prepareStatement(req)){
+    public API_TAXI rechImma(String imma) throws SQLException {
+        String req = "select * from api_taxi where immatriculation=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
             pstm.setString(1, imma);
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
-                    int idtaxi=rs.getInt("IDTAXI");
+                    int idtaxi = rs.getInt("IDTAXI");
                     String carburant = rs.getString("CARBURANT");
                     float prixkm = rs.getFloat("PRIXKM");
                     String description = rs.getString("DESCRIPTION");
@@ -248,19 +251,20 @@ public class TaxiDAO extends DAO<API_TAXI> {
             }
         }
     }
-    
+
     /**
-     * méthode permettant de récupérer toutes les locations relatives à un id location
+     * méthode permettant de récupérer toutes les locations relatives à un id
+     * location
      *
      * @param idloc Identificateur de la location
      * @return liste des locations
      * @throws java.sql.SQLException
      */
-    public List<vue_adresses> rechloc(int idloc) throws SQLException{
+    public List<vue_adresses> rechloc(int idloc) throws SQLException {
         List<vue_adresses> loca = new ArrayList<>();
         String req = "select * from vue_adresses where idloc = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
-            pstm.setInt(1,idloc);
+            pstm.setInt(1, idloc);
             try (ResultSet rs = pstm.executeQuery()) {
                 boolean trouve = false;
                 while (rs.next()) {
@@ -269,17 +273,17 @@ public class TaxiDAO extends DAO<API_TAXI> {
                     int kmtotal = rs.getInt("KMTOTAL");
                     Float acompte = rs.getFloat("ACOMPTE");
                     Float total = rs.getFloat("TOTAL");
-                    int idclient=rs.getInt("IDCLIENT");
-                    int idtaxi=rs.getInt("IDTAXI");
-                    int cp=rs.getInt("CP");
+                    int idclient = rs.getInt("IDCLIENT");
+                    int idtaxi = rs.getInt("IDTAXI");
+                    int cp = rs.getInt("CP");
                     String localite = rs.getString("LOCALITE");
                     String rue = rs.getString("RUE");
                     String num = rs.getString("NUM");
-                    int cp_retour=rs.getInt("cp retour");
+                    int cp_retour = rs.getInt("cp retour");
                     String localite_retour = rs.getString("loc retour");
                     String rue_retour = rs.getString("rue retour");
                     String num_retour = rs.getString("num retour");
-                    loca.add(new vue_adresses(idloc,dateloc,kmtotal,acompte,total,idclient,idtaxi,cp,localite,rue,num,cp_retour,localite_retour,rue_retour,num_retour));
+                    loca.add(new vue_adresses(idloc, dateloc, kmtotal, acompte, total, idclient, idtaxi, cp, localite, rue, num, cp_retour, localite_retour, rue_retour, num_retour));
                 }
 
                 if (!trouve) {
@@ -290,15 +294,15 @@ public class TaxiDAO extends DAO<API_TAXI> {
             }
         }
     }
-    
-    public float prixTotalLoc(int idloc) throws SQLException{
+
+    public float prixTotalLoc(int idloc) throws SQLException {
         String req = "select * from vue_prixtotal where idloc = ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
 
             pstm.setInt(1, idloc);
             try (ResultSet rs = pstm.executeQuery()) {
                 if (rs.next()) {
-                    Float prixtot=rs.getFloat("TOTAL");
+                    Float prixtot = rs.getFloat("TOTAL");
                     return prixtot;
 
                 } else {
@@ -308,5 +312,5 @@ public class TaxiDAO extends DAO<API_TAXI> {
             }
         }
     }
-    
+
 }

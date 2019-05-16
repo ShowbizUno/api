@@ -107,7 +107,7 @@ public class LocationDAO extends DAO<API_LOCATIONTAXI>{
             if (n == 0) {
                 throw new SQLException("aucune ligne de location mise à jour");
             }
-            return read(obj.getIdtaxi());
+            return read(obj.getIdloc());
         }
     }
 
@@ -121,6 +121,37 @@ public class LocationDAO extends DAO<API_LOCATIONTAXI>{
                 throw new SQLException("Aucune location effacée");
             }
             System.out.println("Location supprimée");
+        }
+    }
+    
+    public List<API_LOCATIONTAXI> rechTaxi(int id) throws SQLException{
+         List<API_LOCATIONTAXI> plusieurs = new ArrayList<>();
+        String query1 = "select * from api_locationtaxi where idtaxi=?";
+        try (PreparedStatement pstm = dbConnect.prepareStatement(query1)) {
+
+            pstm.setInt(1, id);
+            try (ResultSet rs = pstm.executeQuery()) {
+                boolean trouve = false;
+                while (rs.next()) {
+                    trouve = true;
+                    int idloc = rs.getInt("IDLOC");
+                    LocalDate date = rs.getDate("DATELOC").toLocalDate();
+                    int kmtot = rs.getInt("KMTOTAL");
+                    float acompte = rs.getFloat("ACOMPTE");
+                    float total = rs.getFloat("TOTAL");
+                    int adrdebut = rs.getInt("ADRDEBUT");
+                    int adrfin = rs.getInt("ADRFIN");
+                    int idclient = rs.getInt("IDCLIENT");
+                    int idtaxi = rs.getInt("IDTAXI");
+                    plusieurs.add(new API_LOCATIONTAXI(idloc,date,kmtot,acompte,total,adrdebut,adrfin,idclient,idtaxi));
+                }
+
+                if (!trouve) {
+                    throw new SQLException("Id taxi inconnu dans les locations");
+                } else {
+                    return plusieurs;
+                }
+            }
         }
     }
     

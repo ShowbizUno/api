@@ -4,6 +4,7 @@ package projet_taxi_main;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 import taxi.DAO.LocationDAO;
 import taxi.metier.API_LOCATIONTAXI;
@@ -19,6 +20,7 @@ public class GestionLocations {
     Scanner sc = new Scanner(System.in);
     API_LOCATIONTAXI loc = null;
     LocationDAO locationDAO = new LocationDAO();
+    List<API_LOCATIONTAXI> locations =null;
 
     public void gestionLocations() {
         locationDAO.setConnection(dbConnect);
@@ -28,7 +30,7 @@ public class GestionLocations {
             System.out.println("Menu des locations");
 
             try {
-                System.out.println("1.Créer une location\n2.Rechercher une location\n3.Modification d'une location\n4.Suppression d'une location \n5.Fin");
+                System.out.println("1.Créer une location\n2.Rechercher une location\n3.Modification d'une location\n4.Suppression d'une location \n5.rech loc par id taxi\n6.fin");
                 System.out.println("Votre réponse: ");
                 rep = Integer.parseInt(sc.nextLine());
                 switch (rep) {
@@ -45,15 +47,17 @@ public class GestionLocations {
                         suppression();
                         break;
                     case 5:
-                        System.out.println("Fin du programme. Merci");
+                        rechloc();
                         break;
+                    case 6:
+                        System.out.println("Fin");
                     default:
                         System.out.println("Erreur!");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Erreur: " + e);
             }
-        } while (rep != 5);
+        } while (rep != 6);
         DBConnection.closeConnection();
     }
 
@@ -150,6 +154,17 @@ public class GestionLocations {
             
         }catch(Exception e){
             System.out.println("erreur: "+e);
+        }
+    }
+    
+    public void rechloc(){
+        try{
+            locations=locationDAO.rechTaxi(1);
+            for (API_LOCATIONTAXI lo : locations) {
+                    System.out.println(lo);
+                }
+        }catch(Exception e){
+            System.out.println("erreur "+e);
         }
     }
 

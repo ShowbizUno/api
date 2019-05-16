@@ -229,6 +229,7 @@ public class Recherche_taxi_id extends javax.swing.JPanel {
             if (!txt_id_taxi.getText().isEmpty()) {
                 int id_taxi = Integer.parseInt(txt_id_taxi.getText());
                 taxiDAO.deleteSolo(t1);
+                txt_id_taxi.setText("");
                 txt_imma.setText("");
                 txt_carb.setText("");
                 txt_prixkm.setText("");

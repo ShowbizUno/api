@@ -10,6 +10,7 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import myconnections.DBConnection;
 import taxi.DAO.TaxiDAO;
+import taxi.DAO.LocationDAO;
 
 /**
  *
@@ -25,6 +26,7 @@ public class Gestion_main extends javax.swing.JFrame {
     
     public Gestion_main() {
         initComponents();
+        setTitle("Gestion globale");
         cardl=(CardLayout)this.getContentPane().getLayout();
         cardl.show(this.getContentPane(), "card2");
         
@@ -36,10 +38,15 @@ public class Gestion_main extends javax.swing.JFrame {
         
         TaxiDAO taxiDAO = new TaxiDAO();
         taxiDAO.setConnection(dbConnect);
+        LocationDAO locationDAO = new LocationDAO();
+        locationDAO.setConnection(dbConnect);
         crea_taxi2.setTaxiDAO(taxiDAO);
         recherche_taxi_descri2.setTaxiDAO(taxiDAO);
         recherche_taxi_id2.setTaxiDAO(taxiDAO);
-       
+        affich_loc1.setTaxiDAO(taxiDAO);
+        affich_loc1.setLocationDAO(locationDAO);
+        crea_loc1.setLocationDAO(locationDAO);
+        gestion_location1.setLocationDAO(locationDAO);
         
     }
 
@@ -56,11 +63,18 @@ public class Gestion_main extends javax.swing.JFrame {
         recherche_taxi_descri2 = new graph.Recherche_taxi_descri();
         crea_taxi2 = new graph.Crea_taxi();
         recherche_taxi_id2 = new graph.Recherche_taxi_id();
+        affich_loc1 = new graph.Affich_loc();
+        crea_loc1 = new graph.Crea_loc();
+        gestion_location1 = new graph.Gestion_location();
         jMenuBar2 = new javax.swing.JMenuBar();
         main_taxi = new javax.swing.JMenu();
         create_taxi = new javax.swing.JMenuItem();
         update_taxi = new javax.swing.JMenuItem();
         rech_desc_taxi = new javax.swing.JMenuItem();
+        rech_loc = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        Creation = new javax.swing.JMenuItem();
+        gestion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -69,20 +83,25 @@ public class Gestion_main extends javax.swing.JFrame {
         background2.setLayout(background2Layout);
         background2Layout.setHorizontalGroup(
             background2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGap(0, 523, Short.MAX_VALUE)
         );
         background2Layout.setVerticalGroup(
             background2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         getContentPane().add(background2, "card2");
         getContentPane().add(recherche_taxi_descri2, "cardRechDesc");
         getContentPane().add(crea_taxi2, "cardCreate");
         getContentPane().add(recherche_taxi_id2, "cardGestion");
+        getContentPane().add(affich_loc1, "rech_loc");
+        getContentPane().add(crea_loc1, "crealoc");
+        getContentPane().add(gestion_location1, "gestionloc");
 
         main_taxi.setText("Taxi");
+        main_taxi.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
 
+        create_taxi.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         create_taxi.setText("Ajout");
         create_taxi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +110,7 @@ public class Gestion_main extends javax.swing.JFrame {
         });
         main_taxi.add(create_taxi);
 
+        update_taxi.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         update_taxi.setText("Gestion");
         update_taxi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +119,7 @@ public class Gestion_main extends javax.swing.JFrame {
         });
         main_taxi.add(update_taxi);
 
+        rech_desc_taxi.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
         rech_desc_taxi.setText("Recherche description");
         rech_desc_taxi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +128,37 @@ public class Gestion_main extends javax.swing.JFrame {
         });
         main_taxi.add(rech_desc_taxi);
 
+        rech_loc.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        rech_loc.setText("Recherche d'une location");
+        rech_loc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rech_locActionPerformed(evt);
+            }
+        });
+        main_taxi.add(rech_loc);
+
         jMenuBar2.add(main_taxi);
+
+        jMenu1.setText("Locations");
+        jMenu1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
+
+        Creation.setText("Création");
+        Creation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreationActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Creation);
+
+        gestion.setText("Gestion");
+        gestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(gestion);
+
+        jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
 
@@ -128,6 +179,21 @@ public class Gestion_main extends javax.swing.JFrame {
         setTitle("Recherche taxi sur la description");
         cardl.show(this.getContentPane(), "cardRechDesc");
     }//GEN-LAST:event_rech_desc_taxiActionPerformed
+
+    private void rech_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rech_locActionPerformed
+        setTitle("Recherche d'une location via un taxi");
+        cardl.show(this.getContentPane(),"rech_loc");
+    }//GEN-LAST:event_rech_locActionPerformed
+
+    private void CreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreationActionPerformed
+        setTitle("Création d'une location");
+        cardl.show(this.getContentPane(),"crealoc");
+    }//GEN-LAST:event_CreationActionPerformed
+
+    private void gestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionActionPerformed
+        setTitle("Gestion d'une location");
+        cardl.show(this.getContentPane(),"gestionloc");
+    }//GEN-LAST:event_gestionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,12 +231,19 @@ public class Gestion_main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Creation;
+    private graph.Affich_loc affich_loc1;
     private graph.Background background2;
+    private graph.Crea_loc crea_loc1;
     private graph.Crea_taxi crea_taxi2;
     private javax.swing.JMenuItem create_taxi;
+    private javax.swing.JMenuItem gestion;
+    private graph.Gestion_location gestion_location1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu main_taxi;
     private javax.swing.JMenuItem rech_desc_taxi;
+    private javax.swing.JMenuItem rech_loc;
     private graph.Recherche_taxi_descri recherche_taxi_descri2;
     private graph.Recherche_taxi_id recherche_taxi_id2;
     private javax.swing.JMenuItem update_taxi;
