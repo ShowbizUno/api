@@ -70,10 +70,20 @@ public class Crea_loc extends javax.swing.JPanel {
         txt_acompte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_acompte.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_acompte.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_acompte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_acompteKeyTyped(evt);
+            }
+        });
 
         txt_total.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_total.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_total.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_total.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_totalKeyTyped(evt);
+            }
+        });
 
         btn_créer.setText("Créer cette location");
         btn_créer.addActionListener(new java.awt.event.ActionListener() {
@@ -104,19 +114,24 @@ public class Crea_loc extends javax.swing.JPanel {
         txt_id_loc.setBackground(new java.awt.Color(153, 153, 153));
         txt_id_loc.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_id_loc.setPreferredSize(new java.awt.Dimension(150, 30));
-        txt_id_loc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_id_locActionPerformed(evt);
-            }
-        });
 
         txt_kmtotaux.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_kmtotaux.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_kmtotaux.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_kmtotaux.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_kmtotauxKeyTyped(evt);
+            }
+        });
 
         txt_dateloc_jour.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_dateloc_jour.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_dateloc_jour.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_dateloc_jour.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dateloc_jourKeyTyped(evt);
+            }
+        });
 
         lbl_adrdebut.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_adrdebut.setText("Adresse de début : ");
@@ -124,6 +139,11 @@ public class Crea_loc extends javax.swing.JPanel {
         txt_adrdebut.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_adrdebut.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_adrdebut.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_adrdebut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_adrdebutKeyTyped(evt);
+            }
+        });
 
         lbl_adrfin.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_adrfin.setText("Adresse de fin : ");
@@ -131,6 +151,11 @@ public class Crea_loc extends javax.swing.JPanel {
         txt_adrfin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_adrfin.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_adrfin.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_adrfin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_adrfinKeyTyped(evt);
+            }
+        });
 
         lbl_idclient.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_idclient.setText("N° d'identifiant du client : ");
@@ -138,6 +163,11 @@ public class Crea_loc extends javax.swing.JPanel {
         txt_idclient.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_idclient.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_idclient.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_idclient.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_idclientKeyTyped(evt);
+            }
+        });
 
         lbl_idtaxi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_idtaxi.setText("N° d'identifiant du taxi : ");
@@ -145,14 +175,29 @@ public class Crea_loc extends javax.swing.JPanel {
         txt_idtaxi.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_idtaxi.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_idtaxi.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_idtaxi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_idtaxiKeyTyped(evt);
+            }
+        });
 
         txt_dateloc_an.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_dateloc_an.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_dateloc_an.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_dateloc_an.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dateloc_anKeyTyped(evt);
+            }
+        });
 
         txt_dateloc_mois.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_dateloc_mois.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_dateloc_mois.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_dateloc_mois.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dateloc_moisKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("J");
 
@@ -281,7 +326,7 @@ public class Crea_loc extends javax.swing.JPanel {
             LocalDate dt = LocalDate.of(year, month, day);
             //System.out.println(dt);
             
-            int prixkm = Integer.parseInt(txt_kmtotaux.getText());
+            int kmtotal = Integer.parseInt(txt_kmtotaux.getText());
             float acompte = Float.parseFloat(txt_acompte.getText());
             float total = Float.parseFloat(txt_total.getText());
             int adrdebut = Integer.parseInt(txt_adrdebut.getText());
@@ -289,7 +334,7 @@ public class Crea_loc extends javax.swing.JPanel {
             int idclient = Integer.parseInt(txt_idclient.getText());
             int idtaxi = Integer.parseInt(txt_idtaxi.getText());
 
-            API_LOCATIONTAXI loc1 = new API_LOCATIONTAXI(0, dt, prixkm, acompte, total, adrdebut, adrfin, idclient, idtaxi);
+            API_LOCATIONTAXI loc1 = new API_LOCATIONTAXI(0, dt, kmtotal, acompte, total, adrdebut, adrfin, idclient, idtaxi);
             loc1 = locationDAO.create(loc1);
             txt_id_loc.setText("" + loc1.getIdloc());
             JOptionPane.showMessageDialog(this, "location créée", "succès", JOptionPane.INFORMATION_MESSAGE);
@@ -299,9 +344,95 @@ public class Crea_loc extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btn_créerActionPerformed
 
-    private void txt_id_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_locActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_id_locActionPerformed
+    private void txt_dateloc_jourKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dateloc_jourKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_dateloc_jour.setEditable(false);
+        } else {
+            txt_dateloc_jour.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_dateloc_jourKeyTyped
+
+    private void txt_dateloc_moisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dateloc_moisKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_dateloc_mois.setEditable(false);
+        } else {
+            txt_dateloc_mois.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_dateloc_moisKeyTyped
+
+    private void txt_dateloc_anKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dateloc_anKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_dateloc_an.setEditable(false);
+        } else {
+            txt_dateloc_an.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_dateloc_anKeyTyped
+
+    private void txt_kmtotauxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_kmtotauxKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_kmtotaux.setEditable(false);
+        } else {
+            txt_kmtotaux.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_kmtotauxKeyTyped
+
+    private void txt_acompteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_acompteKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_acompte.setEditable(false);
+        } else {
+            txt_acompte.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_acompteKeyTyped
+
+    private void txt_totalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_totalKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_total.setEditable(false);
+        } else {
+            txt_total.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_totalKeyTyped
+
+    private void txt_adrdebutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_adrdebutKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_adrdebut.setEditable(false);
+        } else {
+            txt_adrdebut.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_adrdebutKeyTyped
+
+    private void txt_adrfinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_adrfinKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_adrfin.setEditable(false);
+        } else {
+            txt_adrfin.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_adrfinKeyTyped
+
+    private void txt_idclientKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idclientKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_idclient.setEditable(false);
+        } else {
+            txt_idclient.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_idclientKeyTyped
+
+    private void txt_idtaxiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idtaxiKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_idtaxi.setEditable(false);
+        } else {
+            txt_idtaxi.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_idtaxiKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

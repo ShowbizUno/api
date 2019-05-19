@@ -79,6 +79,11 @@ public class Recherche_taxi_id extends javax.swing.JPanel {
         txt_prixkm.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txt_prixkm.setMinimumSize(new java.awt.Dimension(50, 20));
         txt_prixkm.setPreferredSize(new java.awt.Dimension(150, 30));
+        txt_prixkm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_prixkmKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Century Schoolbook", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -251,6 +256,15 @@ public class Recherche_taxi_id extends javax.swing.JPanel {
             txt_id_taxi.setEditable(true);
         }
     }//GEN-LAST:event_txt_id_taxiKeyTyped
+
+    private void txt_prixkmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_prixkmKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || (Character.isSpaceChar(c))) {
+            txt_prixkm.setEditable(false);
+        } else {
+            txt_prixkm.setEditable(true);
+        }
+    }//GEN-LAST:event_txt_prixkmKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

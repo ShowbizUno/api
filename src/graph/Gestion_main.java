@@ -87,7 +87,7 @@ public class Gestion_main extends javax.swing.JFrame {
         );
         background2Layout.setVerticalGroup(
             background2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 459, Short.MAX_VALUE)
         );
 
         getContentPane().add(background2, "card2");
@@ -142,6 +142,7 @@ public class Gestion_main extends javax.swing.JFrame {
         jMenu1.setText("Locations");
         jMenu1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 12)); // NOI18N
 
+        Creation.setFont(new java.awt.Font("Yu Gothic", 0, 12)); // NOI18N
         Creation.setText("Création");
         Creation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +151,7 @@ public class Gestion_main extends javax.swing.JFrame {
         });
         jMenu1.add(Creation);
 
+        gestion.setFont(new java.awt.Font("Yu Gothic", 0, 12)); // NOI18N
         gestion.setText("Gestion");
         gestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
